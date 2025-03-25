@@ -53,7 +53,9 @@ fun CustomComponent(
 ) {
     AndroidView(
         modifier = Modifier.testTag("customComponent"),
-        factory = { context -> CustomView(context) },
+        factory = { context -> CustomView(context).apply {
+            id = R.id.custom_component
+        } },
         update = { view ->
             view.setTitle(title)
             view.setDescription(description)
@@ -69,9 +71,7 @@ fun AnotherComponent(
     AndroidView(
         modifier = Modifier.testTag("anotherComponent"),
         factory = { context ->
-            CustomView(context).apply {
-                id = R.id.custom_component
-            }
+            CustomView(context)
         },
         update = { view ->
             view.setTitle(title)
